@@ -1,5 +1,5 @@
 from scipy.stats import t
-from Calculator.def_files.Sd import Sd
+from Calculator.statistics.Sd import Sd
 
 def Confidence_interval(my_population,confidence_level):
     df = len(my_population) - 1 #degrees of freedom

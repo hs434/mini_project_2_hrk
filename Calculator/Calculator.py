@@ -1,24 +1,27 @@
-from Calculator.def_files.Confidence_interval import Confidence_interval
-from Calculator.def_files.Mean import Mean
-from Calculator.def_files.Median import Median
-from Calculator.def_files.Mode import Mode
-from Calculator.def_files.P_value import P_value
-from Calculator.def_files.Pop_correlation_coefficient import Pop_correlation_coefficient
-from Calculator.def_files.Proportion import Proportion
-from Calculator.def_files.Sample_mean import Sample_mean
-from Calculator.def_files.Sample_sd import Sample_sd
-from Calculator.def_files.Sd import Sd
-from Calculator.def_files.Standardised_score import Standardised_score
-from Calculator.def_files.Variance import Variance
-from Calculator.def_files.Variance_popu_proportion import Variance_popu_proportion
-from Calculator.def_files.Variance_sample_proportion import Variance_sample_proportion
-from Calculator.def_files.Z_score import Z_score
+from Calculator.statistics.Confidence_interval import Confidence_interval
+from Calculator.statistics.Mean import Mean
+from Calculator.statistics.Median import Median
+from Calculator.statistics.Mode import Mode
+from Calculator.statistics.P_value import P_value
+from Calculator.statistics.Pop_correlation_coefficient import Pop_correlation_coefficient
+from Calculator.statistics.Proportion import Proportion
+from Calculator.statistics.Sample_mean import Sample_mean
+from Calculator.statistics.Sample_sd import Sample_sd
+from Calculator.statistics.Sd import Sd
+from Calculator.statistics.Standardised_score import Standardised_score
+from Calculator.statistics.Variance import Variance
+from Calculator.statistics.Variance_popu_proportion import Variance_popu_proportion
+from Calculator.statistics.Variance_sample_proportion import Variance_sample_proportion
+from Calculator.statistics.Z_score import Z_score
+from  CsvReader.Write_answer import write_answer
+from random import sample
+import math
 
 class Calculator:
     def __init__(self):
         pass
     def mean(self,my_population):
-        return Mean(my_population)
+        return round(Mean(my_population),2)
 
     def median(self, my_population):
         return Median(my_population)
@@ -32,6 +35,8 @@ class Calculator:
 
 
     def variance_popu_proportion(self, my_population):
+        p, proportion_success = Proportion(my_population)
+        write_answer("answer_variance_popu_proportion.csv", round(Variance(proportion_success), 2))
         return round(Variance_popu_proportion(my_population),2)
 
     def z_score(self,my_population):
@@ -42,7 +47,7 @@ class Calculator:
         return new_z_score
 
     def standardised_score(self,my_population):
-        new_standardised_score1 = Z_score(my_population)
+        new_standardised_score1 = Standardised_score(my_population)
         new_standardised_score = list()
         for x in new_standardised_score1:
             new_standardised_score.append(round(x, 2))  # creating rounded zscore upto 2 decimal points
@@ -59,18 +64,27 @@ class Calculator:
     def variance(self,my_population):
         return round(Variance(my_population),2)
 
-    def p_value(self):
-        # return P_value()
-        pass
+    def p_value(self,my_population):
+        confidence_level = 0.95
+        return round(P_value(my_population, confidence_level), 2)
     def proportion(self,my_population):
-        return Proportion(my_population)
+        p,t = Proportion(my_population)
+        return round(p,2)
 
     def sample_mean(self,my_population):
-        return Sample_mean(my_population)
+        sample_list = sample(my_population,math.floor(len(my_population)/2))
+        write_answer("answer_sample_mean.csv",Mean(sample_list))
+        return Sample_mean(sample_list)
 
     def sample_sd(self,my_population):
-        return Sample_sd(my_population)
+        sample_list = sample(my_population, math.floor(len(my_population) / 2))
+        write_answer("answer_sample_sd.csv", round(Sd(sample_list),2))
+        return round(Sample_sd(sample_list),2)
+
     def variance_sample_proportion(self,my_population):
-        return Variance_sample_proportion(my_population)
+        sample_list = sample(my_population, math.floor(len(my_population) / 2))
+        p,proportion_success = Proportion(sample_list)
+        write_answer("answer_variance_sample_proportion.csv", round(Variance(proportion_success),2))
+        return round(Variance_sample_proportion(sample_list),2)
 
 

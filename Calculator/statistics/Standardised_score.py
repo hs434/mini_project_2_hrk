@@ -1,5 +1,5 @@
-from Calculator.def_files.Mean import Mean
-from Calculator.def_files.Sd import Sd
+from Calculator.statistics.Mean import Mean
+from Calculator.statistics.Sd import Sd
 
 def Standardised_score(my_population):
     my_mean = Mean(my_population)

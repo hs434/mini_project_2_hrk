@@ -1,5 +1,5 @@
-from Calculator.def_files.Mean import Mean
-from Calculator.def_files.Sd import Sd
+from Calculator.statistics.Mean import Mean
+from Calculator.statistics.Sd import Sd
 
 def Pop_correlation_coefficient(my_population, my_population2):
     mean1, mean2 = Mean(my_population), Mean(my_population2)
