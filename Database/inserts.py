@@ -46,4 +46,5 @@ pprint(session.new)
 pprint(engine.table_names())
 # 10 - commit and close session
 session.commit()
+print(c1.id , c2.id)
 session.close()
