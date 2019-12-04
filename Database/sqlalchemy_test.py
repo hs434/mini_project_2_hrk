@@ -198,3 +198,7 @@ print(session.query(Customer).count())
 print(session.query(Item).count())
 print(session.query(Order).count())
 
+pprint("Below Data for first() method")
+print(session.query(Customer).first())
+print(session.query(Item).first())
+print(session.query(Order).first())
