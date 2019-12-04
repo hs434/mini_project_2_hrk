@@ -7,7 +7,6 @@ from datetime import datetime
 from sqlalchemy import *
 
 
-
 engine = create_engine("sqlite:////web/Sqlite-Data/mydb.db")
 Base = declarative_base()
 
@@ -44,5 +43,34 @@ class OrderLine(Base):
     order_id = Column(Integer(), ForeignKey('orders.id'))
     item_id = Column(Integer(), ForeignKey('items.id'))
     quantity = Column(SmallInteger())
-Base.metadata.create_all(engine)
 
+
+#Base.metadata.drop_all(engine)
+# 2 - generate database schema
+Base.metadata.create_all(engine)
+Base.metadata.bind = engine
+
+# 3 - create a new session
+session = Session(bind=engine)
+
+# 4 - create Customer
+c1 = Customer(first_name='Toby',
+              last_name='Miller',
+              username='tmiller',
+              email='tmiller@example.com',
+              address='1662 Kinney Street',
+              town='Wolfden'
+              )
+
+c2 = Customer(first_name='Scott',
+              last_name='Harvey',
+              username='scottharvey',
+              email='scottharvey@example.com',
+              address='424 Patterson Street',
+              town='Beckinsdale'
+              )
+session.add(c1)
+session.add(c2)
+#session.new
+# 10 - commit and close session
+session.commit()

@@ -4,5 +4,4 @@ COPY . /web
 WORKDIR /web
 RUN pip install -r ./requirements.txt
 ENTRYPOINT ["python"]
-#CMD ["/web/Database/query.py" ]
-CMD ["/web/Database/inserts.py" ]
+CMD ["/web/Database/sqlalchemy_test.py" ]
