@@ -180,3 +180,6 @@ pprint("Below Data for session.query(Order).all()")
 result = session.query(Order).all()
 for row in result:
    print ("Order: ",row.id)
+
+pprint("Below Data for session.query(Customer)")
+print(session.query(Customer))
