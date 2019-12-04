@@ -176,3 +176,7 @@ result = session.query(Item).all()
 for row in result:
    print ("Name: ",row.name)
 
+pprint("Below Data for session.query(Order).all()")
+result = session.query(Order).all()
+for row in result:
+   print ("Order: ",row.id)
