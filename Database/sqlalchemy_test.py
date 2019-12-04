@@ -1,14 +1,30 @@
 from sqlalchemy import create_engine, MetaData, Table, Integer, String, \
-    Column, DateTime, ForeignKey, Numeric, SmallInteger
+    Column, DateTime, ForeignKey, Numeric, SmallInteger, Float
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship,sessionmaker, Session
 from datetime import datetime
 from sqlalchemy import *
+import decimal
+import sqlite3
+from  pprint import pprint
+
 
 
 engine = create_engine("sqlite:////web/Sqlite-Data/mydb.db")
 Base = declarative_base()
+
+def adapt_decimal(d):
+    return str(d)
+
+def convert_decimal(s):
+    return decimal.Decimal(s)
+
+# Register the adapter
+sqlite3.register_adapter(decimal.Decimal, adapt_decimal)
+
+# Register the converter
+sqlite3.register_converter("DECTEXT", convert_decimal)
 
 class Customer(Base):
     __tablename__ = 'customers'
@@ -71,10 +87,7 @@ c2 = Customer(first_name='Scott',
               )
 session.add(c1)
 session.add(c2)
-#session.new
-# 10 - commit and close session
 session.commit()
-
 
 
 
@@ -115,15 +128,14 @@ c6 = Customer(first_name='Scott',
 session.add_all([c3, c4, c5, c6])
 session.commit()
 
-
 #add some products to the items table
 i1 = Item(name='Chair', cost_price=9.21, selling_price=10.81, quantity=5)
-i2 = Item(name='Pen', cost_price=3.45, selling_price=4.51, quantity=3)
-i3 = Item(name='Headphone', cost_price=15.52, selling_price=16.81, quantity=50)
+i2 = Item(name='Pen', cost_price= 3.45, selling_price=4.51, quantity=3)
+i3 = Item(name='Headphone', cost_price= 15.52, selling_price=16.81, quantity=50)
 i4 = Item(name='Travel Bag', cost_price=20.1, selling_price=24.21, quantity=50)
-i5 = Item(name='Keyboard', cost_price=20.1, selling_price=22.11, quantity=50)
-i6 = Item(name='Monitor', cost_price=200.14, selling_price=212.89, quantity=50)
-i7 = Item(name='Watch', cost_price=100.58, selling_price=104.41, quantity=50)
+i5 = Item(name='Keyboard', cost_price= 20.1, selling_price=22.11, quantity=50)
+i6 = Item(name='Monitor', cost_price= 200.14, selling_price=212.89, quantity=50)
+i7 = Item(name='Watch', cost_price= 100.58, selling_price=104.41, quantity=50)
 i8 = Item(name='Water Bottle', cost_price=20.89, selling_price=25, quantity=50)
 
 session.add_all([i1, i2, i3, i4, i5, i6, i7, i8])
@@ -143,14 +155,18 @@ session.add_all([o1, o2])
 session.new
 orders = [o1, o2]
 session.commit()
-session.close()
 
-o3 = Order(customer=c1)
-orderline1 = OrderLine(item=i1, quantity=5)
-orderline2 = OrderLine(item=i2, quantity=10)
+#o3 = Order(customer=c1)
+#orderline1 = OrderLine(item=i1, quantity=5)
+#orderline2 = OrderLine(item=i2, quantity=10)
 
-o3.order_lines.append(orderline1)
-o3.order_lines.append(orderline2)
+#o3.order_lines.append(orderline1)
+#o3.order_lines.append(orderline2)
 
-session.add_all([o3])
-session.commit()
+#session.add_all([o3])
+#session.commit()
+
+pprint("Below Data for session.query(Customer).all()")
+result = session.query(Customer).all()
+for row in result:
+   print ("Name: ",row.first_name ,","  ,row.last_name ," Address: ",row.address, " Email: ",row.email)
