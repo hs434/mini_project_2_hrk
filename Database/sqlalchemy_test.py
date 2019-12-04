@@ -170,3 +170,9 @@ pprint("Below Data for session.query(Customer).all()")
 result = session.query(Customer).all()
 for row in result:
    print ("Name: ",row.first_name ,","  ,row.last_name ," Address: ",row.address, " Email: ",row.email)
+
+pprint("Below Data for session.query(Item).all()")
+result = session.query(Item).all()
+for row in result:
+   print ("Name: ",row.name)
+
