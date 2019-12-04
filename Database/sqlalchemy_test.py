@@ -189,4 +189,5 @@ q = session.query(Customer)
 for c in q:
     print(c.id, c.first_name)
 
-
+pprint("Below Data for session.query(Customer.id, Customer.first_name).all()")
+print(session.query(Customer.id, Customer.first_name).all())
