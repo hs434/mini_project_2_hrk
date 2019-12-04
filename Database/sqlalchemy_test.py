@@ -183,3 +183,10 @@ for row in result:
 
 pprint("Below Data for session.query(Customer)")
 print(session.query(Customer))
+
+pprint("Below Data with for loop for session.query(Customer)")
+q = session.query(Customer)
+for c in q:
+    print(c.id, c.first_name)
+
+
