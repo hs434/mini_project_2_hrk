@@ -252,7 +252,12 @@ for c in q:
  for c in q:
      print("Customer:", c.id, '-', c.first_name, c.last_name)
 
- pprint("Below Data is for IS NULL")
+pprint("Below Data is for IS NULL")
 q = session.query(Order).filter(Order.date_placed == None).all()
 for o in q:
-        print("Order: ", o.id)
+    print("Order: ", o.id)
+
+pprint("Below Data is for IS NOT NULL")
+q = session.query(Order).filter(Order.date_placed != None).all()
+for o in q:
+    print("Order: ", o.id)
