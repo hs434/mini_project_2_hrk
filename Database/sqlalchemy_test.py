@@ -268,6 +268,11 @@ for c in q:
     print("Customer: ",c.id,"-", c.first_name,c.last_name)
 
 pprint("Below Data is for NOT IN")
-q =session.query(Customer).filter(Customer.first_name.notin_(['Toby', 'Sarah'])).all()
+q = session.query(Customer).filter(Customer.first_name.notin_(['Toby', 'Sarah'])).all()
 for c in q:
     print("Customer: ",c.id,"-", c.first_name,c.last_name)
+
+pprint("Below Data is for BETWEEN")
+q =	session.query(Item).filter(Item.cost_price.between(10, 50)).all()
+for i in q:
+    print("Item: ",i.id,"-", i.name)
