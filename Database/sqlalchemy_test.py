@@ -296,3 +296,8 @@ pprint("Below Data is for NOT LIKE")
 q =	session.query(Item).filter(not_(Item.name.like("W%"))).all()
 for i in q:
     print("Item: ",i.id,"-", i.name)
+
+pprint("Below Data is for limit() method")
+q =	session.query(Customer).limit(2).all()
+for c in q:
+    print("Customer: ", c.id, "-", c.first_name, c.last_name)
