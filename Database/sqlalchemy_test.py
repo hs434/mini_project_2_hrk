@@ -282,3 +282,7 @@ q =	session.query(Item).filter(not_(Item.cost_price.between(10, 50))).all()
 for i in q:
     print("Item: ",i.id,"-", i.name)
 
+pprint("Below Data is for LIKE")
+q =	session.query(Item).filter(Item.name.like("%r")).all()
+for i in q:
+    print("Item: ",i.id,"-", i.name)
