@@ -307,3 +307,6 @@ q =	session.query(Customer).filter(Customer.address.ilike("%avenue")).limit(2).a
 for c in q:
     print("Customer: ", c.id, "-", c.first_name, c.last_name)
 
+pprint("Below Data is for sql equivalent for limit() method")
+print(session.query(Customer).limit(2))
+print(session.query(Customer).filter(Customer.address.ilike("%avenue")).limit(2))
