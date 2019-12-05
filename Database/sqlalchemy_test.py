@@ -241,3 +241,13 @@ for c in q:
 )).all()
  for c in q:
      print("Customer:", c.id, '-', c.first_name, c.last_name)
+
+ pprint("Below Data for all johns who don't live in Peterbrugh")
+ q = session.query(Customer).filter(and_(
+    Customer.first_name == 'John',
+    not_(
+        Customer.town == 'Peterbrugh',
+    )
+)).all()
+ for c in q:
+     print("Customer:", c.id, '-', c.first_name, c.last_name)
