@@ -225,3 +225,11 @@ print(session.query(Customer).filter(Customer.first_name == 'John'))
 
 pprint("Below sql equivalent for multiple filters to the filter() method")
 print(session.query(Customer).filter(Customer.id <= 5, Customer.town.like("Nor%")))
+
+pprint("Below Data for all customers who either live in Peterbrugh or Norfolk")
+q = session.query(Customer).filter(or_(
+    Customer.town == 'Peterbrugh',
+    Customer.town == 'Norfolk'
+)).all()
+for c in q:
+ print("Customer:",c.id,'-',c.first_name,c.last_name)
