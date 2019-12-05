@@ -213,3 +213,11 @@ print("Customer:",c.id,'-',c.first_name)
 i = session.query(Item).get(1)
 print("Item:",i.id,'-',i.name)
 print(session.query(Order).get(100))
+
+
+pprint("Below Data for filter() method")
+q = session.query(Customer).filter(Customer.first_name == 'John').all()
+for c in q:
+ print("Customer:",c.id,'-',c.first_name,c.last_name)
+
+
