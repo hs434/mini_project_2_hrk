@@ -301,3 +301,9 @@ pprint("Below Data is for limit() method")
 q =	session.query(Customer).limit(2).all()
 for c in q:
     print("Customer: ", c.id, "-", c.first_name, c.last_name)
+
+pprint("Below Data is for limit() method with ilike")
+q =	session.query(Customer).filter(Customer.address.ilike("%avenue")).limit(2).all()
+for c in q:
+    print("Customer: ", c.id, "-", c.first_name, c.last_name)
+
