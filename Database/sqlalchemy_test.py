@@ -286,3 +286,8 @@ pprint("Below Data is for LIKE")
 q =	session.query(Item).filter(Item.name.like("%r")).all()
 for i in q:
     print("Item: ",i.id,"-", i.name)
+
+pprint("Below Data is for iLIKE")
+q =	session.query(Item).filter(Item.name.ilike("w%")).all()
+for i in q:
+    print("Item: ",i.id,"-", i.name)
