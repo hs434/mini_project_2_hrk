@@ -220,4 +220,6 @@ q = session.query(Customer).filter(Customer.first_name == 'John').all()
 for c in q:
  print("Customer:",c.id,'-',c.first_name,c.last_name)
 
+pprint("Below sql equivalent for filter() method")
+print(session.query(Customer).filter(Customer.first_name == 'John'))
 
