@@ -223,3 +223,5 @@ for c in q:
 pprint("Below sql equivalent for filter() method")
 print(session.query(Customer).filter(Customer.first_name == 'John'))
 
+pprint("Below sql equivalent for multiple filters to the filter() method")
+print(session.query(Customer).filter(Customer.id <= 5, Customer.town.like("Nor%")))
