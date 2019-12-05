@@ -265,5 +265,9 @@ for o in q:
 pprint("Below Data is for IN")
 q = session.query(Customer).filter(Customer.first_name.in_(['Toby', 'Sarah'])).all()
 for c in q:
-    print("Customer: ", c.first_name,c.last_name)
+    print("Customer: ",c.id,"-", c.first_name,c.last_name)
 
+pprint("Below Data is for NOT IN")
+q =session.query(Customer).filter(Customer.first_name.notin_(['Toby', 'Sarah'])).all()
+for c in q:
+    print("Customer: ",c.id,"-", c.first_name,c.last_name)
