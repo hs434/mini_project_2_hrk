@@ -318,3 +318,13 @@ for c in q:
 
 pprint("Below Data is for sql equivalent for limit() method")
 print(session.query(Customer).limit(2).offset(2))
+
+pprint("Below Data is for order_by() method")
+q =	session.query(Item).filter(Item.name.ilike("wa%")).all()
+for i in q:
+    print("Item: ", i.id, "-", i.name)
+
+pprint("Below Data is for order_by() method")
+q =	session.query(Item).filter(Item.name.ilike("wa%")).order_by(Item.cost_price).all()
+for i in q:
+    print("Item: ", i.id, "-", i.name)
