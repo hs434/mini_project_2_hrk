@@ -233,3 +233,11 @@ q = session.query(Customer).filter(or_(
 )).all()
 for c in q:
  print("Customer:",c.id,'-',c.first_name,c.last_name)
+
+ pprint("Below Data for all customers whose first name is John and live in Norfolk")
+ q = session.query(Customer).filter(and_(
+    Customer.first_name == 'John',
+    Customer.town == 'Norfolk'
+)).all()
+ for c in q:
+     print("Customer:", c.id, '-', c.first_name, c.last_name)
