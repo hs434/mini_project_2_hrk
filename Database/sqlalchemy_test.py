@@ -315,3 +315,6 @@ pprint("Below Data is for offset() method")
 q =	session.query(Customer).limit(2).offset(2).all()
 for c in q:
     print("Customer: ", c.id, "-", c.first_name, c.last_name)
+
+pprint("Below Data is for sql equivalent for limit() method")
+print(session.query(Customer).limit(2).offset(2))
