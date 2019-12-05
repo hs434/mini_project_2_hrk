@@ -261,3 +261,9 @@ pprint("Below Data is for IS NOT NULL")
 q = session.query(Order).filter(Order.date_placed != None).all()
 for o in q:
     print("Order: ", o.id)
+
+pprint("Below Data is for IN")
+q = session.query(Customer).filter(Customer.first_name.in_(['Toby', 'Sarah'])).all()
+for c in q:
+    print("Customer: ", c.first_name,c.last_name)
+
