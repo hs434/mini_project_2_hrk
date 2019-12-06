@@ -322,3 +322,9 @@ pprint("Below Data is for desc() function")
 q =	session.query(Item).filter(Item.name.ilike("wa%")).order_by(desc(Item.cost_price)).all()
 for i in q:
     print("Item: ", i.id, "-", i.name)
+
+
+pprint("Below Data is for join() method")
+q =	session.query(Customer).join(Order).all()
+for c in q:
+    print("Customer: ", c.id, "-", c.first_name, c.last_name)
