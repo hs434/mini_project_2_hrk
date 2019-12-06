@@ -334,3 +334,11 @@ print(session.query(Customer).join(Order))
 
 pprint("Below Data is for one or more table in a single query")
 pprint(session.query(Customer.id, Customer.username, Order.id).join(Order).all())
+
+pprint("Below Data is for outerjoin()")
+q =	session.query(
+    Customer.first_name,
+    Order.id,
+).outerjoin(Order).all()
+for c in q:
+    print(c.first_name,   c.id)
