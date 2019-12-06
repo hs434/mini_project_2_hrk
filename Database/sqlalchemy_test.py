@@ -386,3 +386,10 @@ i = session.query(Item).filter(
 session.commit()
 
 print(i)
+
+
+print("Below Data is for Deleting Data ")
+i = session.query(Item).filter(Item.name == 'Monitor').one()
+session.delete(i)
+session.commit()
+print("Item: ",i.id,"-",i.name)
