@@ -355,4 +355,4 @@ pprint("Below Data is for having() method")
 print(session.query(
     func.count("*").label('town_count'),
     Customer.town
-).group_by(Customer.town).having(func.count("*") > 2).all())
+).group_by(Customer.town).having(func.count("*") >= 2).all())
