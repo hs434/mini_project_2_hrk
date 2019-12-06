@@ -7,6 +7,7 @@ from datetime import datetime
 from sqlalchemy import *
 from  pprint import pprint
 from sqlalchemy import desc
+from sqlalchemy import func
 
 
 
@@ -342,3 +343,9 @@ q =	session.query(
 ).outerjoin(Order).all()
 for c in q:
     print(c.first_name,   c.id)
+
+pprint("Below Data is for group_by() method")
+print(session.query(func.count(Customer.id)).join(Order).filter(
+    Customer.first_name == 'John',
+    Customer.last_name == 'Green',
+).group_by(Customer.id).scalar())
