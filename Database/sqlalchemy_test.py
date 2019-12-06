@@ -378,3 +378,11 @@ result =  s1.union(s2).all()
 for row in result:
    print (row)
 
+
+print("Below Data is for Updating Data ")
+i = session.query(Item).filter(
+    Item.name.ilike("W%")
+).update({"quantity": 60}, synchronize_session='fetch')
+session.commit()
+
+print(i)
