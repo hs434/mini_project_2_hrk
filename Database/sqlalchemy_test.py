@@ -5,26 +5,15 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship,sessionmaker, Session
 from datetime import datetime
 from sqlalchemy import *
-import decimal
-import sqlite3
 from  pprint import pprint
+from sqlalchemy import desc
 
 
 
 engine = create_engine("sqlite:////web/Sqlite-Data/mydb.db")
 Base = declarative_base()
 
-def adapt_decimal(d):
-    return str(d)
 
-def convert_decimal(s):
-    return decimal.Decimal(s)
-
-# Register the adapter
-sqlite3.register_adapter(decimal.Decimal, adapt_decimal)
-
-# Register the converter
-sqlite3.register_converter("DECTEXT", convert_decimal)
 
 class Customer(Base):
     __tablename__ = 'customers'
@@ -326,5 +315,10 @@ for i in q:
 
 pprint("Below Data is for order_by() method")
 q =	session.query(Item).filter(Item.name.ilike("wa%")).order_by(Item.cost_price).all()
+for i in q:
+    print("Item: ", i.id, "-", i.name)
+
+pprint("Below Data is for desc() function")
+q =	session.query(Item).filter(Item.name.ilike("wa%")).order_by(desc(Item.cost_price)).all()
 for i in q:
     print("Item: ", i.id, "-", i.name)
