@@ -8,6 +8,8 @@ from sqlalchemy import *
 from  pprint import pprint
 from sqlalchemy import desc
 from sqlalchemy import func, distinct, cast, Date, union, text
+from sqlalchemy import update
+from sqlalchemy.exc import IntegrityError
 
 
 
@@ -388,24 +390,63 @@ session.commit()
 print(i)
 
 
-print("Below Data is for Deleting Data ")
+print("\n Below Data is for Deleting Data ")
 i = session.query(Item).filter(Item.name == 'Monitor').one()
 session.delete(i)
 session.commit()
-print("Item: ",i.id,"-",i.name)
+print("\Item: ",i.id,"-",i.name)
 
 
-print("Below Data is for Raw Queries 1 ")
+print("\n Below Data is for Raw Queries 1 ")
 q = session.query(Customer).filter(text("first_name = 'John'")).all()
 for c in q:
     print("Customer: ", c.id, "-", c.first_name, c.last_name)
 
-print("Below Data is for Raw Queries 2 ")
+print("\n Below Data is for Raw Queries 2 ")
 q = session.query(Customer).filter(text("town like 'Nor%'")).all()
 for c in q:
     print("Customer: ", c.id, "-", c.first_name, c.last_name)
 
-print("Below Data is for Raw Queries 3 ")
+print("\n Below Data is for Raw Queries 3 ")
 q = session.query(Customer).filter(text("town like 'Nor%'")).order_by(text("first_name, id desc")).all()
 for c in q:
     print("Customer: ", c.id, "-", c.first_name, c.last_name)
+
+
+
+print("\n Below Data is for Transactions ")
+
+result = session.query(Order).all()
+def dispatch_order(order_id):
+    # check whether order_id is valid or not
+    order = session.query(Order).get(order_id)
+
+    if not order:
+        raise ValueError("Invalid order id: {}.".format(order_id))
+
+    if order.date_shipped:
+        print("Order already shipped.")
+        return
+
+    try:
+        for i in order.order_lines:
+            i.item.quantity = i.item.quantity - i.quantity
+
+        order.date_shipped = datetime.now()
+        session.commit()
+        print("Transaction completed.")
+
+    except IntegrityError as e:
+        print(e)
+        print("Rolling back ...")
+        session.rollback()
+        print("Transaction failed.")
+
+print("Order Status For Order ID 1 ")
+dispatch_order(1)
+print("Order Status For Order ID 2 ")
+dispatch_order(2)
+print("Order Status For Order ID 3 ")
+dispatch_order(3)
+print("Order Status For Order ID 4 ")
+dispatch_order(4)
