@@ -158,39 +158,39 @@ session.commit()
 #session.add_all([o3])
 #session.commit()
 
-pprint("Below Data for session.query(Customer).all()")
+print("\n Below Data for session.query(Customer).all()")
 result = session.query(Customer).all()
 for row in result:
    print ("Name: ",row.first_name ,","  ,row.last_name ," Address: ",row.address, " Email: ",row.email)
 
-pprint("Below Data for session.query(Item).all()")
+print("\n Below Data for session.query(Item).all()")
 result = session.query(Item).all()
 for row in result:
    print ("Name: ",row.name)
 
-pprint("Below Data for session.query(Order).all()")
+print("\n Below Data for session.query(Order).all()")
 result = session.query(Order).all()
 for row in result:
    print ("Order: ",row.id)
 
-pprint("Below Data for session.query(Customer)")
+print("\n Below Data for session.query(Customer)")
 print(session.query(Customer))
 
-pprint("Below Data with for loop for session.query(Customer)")
+print("\n Below Data with for loop for session.query(Customer)")
 q = session.query(Customer)
 for c in q:
     print(c.id, c.first_name)
 
-pprint("Below Data for session.query(Customer.id, Customer.first_name).all()")
+print("\n Below Data for session.query(Customer.id, Customer.first_name).all()")
 print(session.query(Customer.id, Customer.first_name).all())
 
 
-pprint("Below Data for count() method")
+print("\n Below Data for count() method")
 print(session.query(Customer).count())
 print(session.query(Item).count())
 print(session.query(Order).count())
 
-pprint("Below Data for first() method")
+print("\n Below Data for first() method")
 c = session.query(Customer).first()
 print("Customer:",c.id,'-',c.first_name)
 i = session.query(Item).first()
@@ -199,7 +199,7 @@ o =session.query(Order).first()
 print("Order:",o.id)
 
 
-pprint("Below Data for get() method")
+print("\n Below Data for get() method")
 c = session.query(Customer).get(1)
 print("Customer:",c.id,'-',c.first_name)
 i = session.query(Item).get(1)
@@ -207,18 +207,18 @@ print("Item:",i.id,'-',i.name)
 print(session.query(Order).get(100))
 
 
-pprint("Below Data for filter() method")
+print("\n  Data for filter() method")
 q = session.query(Customer).filter(Customer.first_name == 'John').all()
 for c in q:
  print("Customer:",c.id,'-',c.first_name,c.last_name)
 
-pprint("Below sql equivalent for filter() method")
+print("\n Below sql equivalent for filter() method")
 print(session.query(Customer).filter(Customer.first_name == 'John'))
 
-pprint("Below sql equivalent for multiple filters to the filter() method")
+print("\n Below sql equivalent for multiple filters to the filter() method")
 print(session.query(Customer).filter(Customer.id <= 5, Customer.town.like("Nor%")))
 
-pprint("Below Data for all customers who either live in Peterbrugh or Norfolk")
+print("\n Below Data for all customers who either live in Peterbrugh or Norfolk")
 q = session.query(Customer).filter(or_(
     Customer.town == 'Peterbrugh',
     Customer.town == 'Norfolk'
@@ -226,7 +226,7 @@ q = session.query(Customer).filter(or_(
 for c in q:
  print("Customer:",c.id,'-',c.first_name,c.last_name)
 
- pprint("Below Data for all customers whose first name is John and live in Norfolk")
+ print("\n Below Data for all customers whose first name is John and live in Norfolk")
  q = session.query(Customer).filter(and_(
     Customer.first_name == 'John',
     Customer.town == 'Norfolk'
@@ -234,7 +234,7 @@ for c in q:
  for c in q:
      print("Customer:", c.id, '-', c.first_name, c.last_name)
 
- pprint("Below Data for all johns who don't live in Peterbrugh")
+ print("\n Below Data for all johns who don't live in Peterbrugh")
  q = session.query(Customer).filter(and_(
     Customer.first_name == 'John',
     not_(
@@ -244,101 +244,101 @@ for c in q:
  for c in q:
      print("Customer:", c.id, '-', c.first_name, c.last_name)
 
-pprint("Below Data is for IS NULL")
+print("\n Below Data is for IS NULL")
 q = session.query(Order).filter(Order.date_placed == None).all()
 for o in q:
     print("Order: ", o.id)
 
-pprint("Below Data is for IS NOT NULL")
+print("\n Below Data is for IS NOT NULL")
 q = session.query(Order).filter(Order.date_placed != None).all()
 for o in q:
     print("Order: ", o.id)
 
-pprint("Below Data is for IN")
+print("\n Below Data is for IN")
 q = session.query(Customer).filter(Customer.first_name.in_(['Toby', 'Sarah'])).all()
 for c in q:
     print("Customer: ",c.id,"-", c.first_name,c.last_name)
 
-pprint("Below Data is for NOT IN")
+print("\n Below Data is for NOT IN")
 q = session.query(Customer).filter(Customer.first_name.notin_(['Toby', 'Sarah'])).all()
 for c in q:
     print("Customer: ",c.id,"-", c.first_name,c.last_name)
 
-pprint("Below Data is for BETWEEN")
+print("\n Below Data is for BETWEEN")
 q =	session.query(Item).filter(Item.cost_price.between(10, 50)).all()
 for i in q:
     print("Item: ",i.id,"-", i.name)
 
-pprint("Below Data is for NOT BETWEEN")
+print("\n Below Data is for NOT BETWEEN")
 q =	session.query(Item).filter(not_(Item.cost_price.between(10, 50))).all()
 for i in q:
     print("Item: ",i.id,"-", i.name)
 
-pprint("Below Data is for LIKE")
+print("\n Below Data is for LIKE")
 q =	session.query(Item).filter(Item.name.like("%r")).all()
 for i in q:
     print("Item: ",i.id,"-", i.name)
 
-pprint("Below Data is for iLIKE")
+print("\n Below Data is for iLIKE")
 q =	session.query(Item).filter(Item.name.ilike("w%")).all()
 for i in q:
     print("Item: ",i.id,"-", i.name)
 
-pprint("Below Data is for NOT LIKE")
+print("\n Below Data is for NOT LIKE")
 q =	session.query(Item).filter(not_(Item.name.like("W%"))).all()
 for i in q:
     print("Item: ",i.id,"-", i.name)
 
-pprint("Below Data is for limit() method")
+print("\n Below Data is for limit() method")
 q =	session.query(Customer).limit(2).all()
 for c in q:
     print("Customer: ", c.id, "-", c.first_name, c.last_name)
 
-pprint("Below Data is for limit() method with ilike")
+print("\n Below Data is for limit() method with ilike")
 q =	session.query(Customer).filter(Customer.address.ilike("%avenue")).limit(2).all()
 for c in q:
     print("Customer: ", c.id, "-", c.first_name, c.last_name)
 
-pprint("Below Data is for sql equivalent for limit() method")
+print("\n Below Data is for sql equivalent for limit() method")
 print(session.query(Customer).limit(2))
 print(session.query(Customer).filter(Customer.address.ilike("%avenue")).limit(2))
 
-pprint("Below Data is for offset() method")
+print("\n Below Data is for offset() method")
 q =	session.query(Customer).limit(2).offset(2).all()
 for c in q:
     print("Customer: ", c.id, "-", c.first_name, c.last_name)
 
-pprint("Below Data is for sql equivalent for limit() method")
+print("\n Below Data is for sql equivalent for limit() method")
 print(session.query(Customer).limit(2).offset(2))
 
-pprint("Below Data is for order_by() method")
+print("\n Below Data is for order_by() method")
 q =	session.query(Item).filter(Item.name.ilike("wa%")).all()
 for i in q:
     print("Item: ", i.id, "-", i.name)
 
-pprint("Below Data is for order_by() method")
+print("\n Below Data is for order_by() method")
 q =	session.query(Item).filter(Item.name.ilike("wa%")).order_by(Item.cost_price).all()
 for i in q:
     print("Item: ", i.id, "-", i.name)
 
-pprint("Below Data is for desc() function")
+print("\n Below Data is for desc() function")
 q =	session.query(Item).filter(Item.name.ilike("wa%")).order_by(desc(Item.cost_price)).all()
 for i in q:
     print("Item: ", i.id, "-", i.name)
 
 
-pprint("Below Data is for join() method")
+print("\n Below Data is for join() method")
 q =	session.query(Customer).join(Order).all()
 for c in q:
     print("Customer: ", c.id, "-", c.first_name, c.last_name)
 
-pprint("Below Data is for sql equivalent for join() method")
+print("\n Below Data is for sql equivalent for join() method")
 print(session.query(Customer).join(Order))
 
-pprint("Below Data is for one or more table in a single query")
+print("\n Below Data is for one or more table in a single query")
 pprint(session.query(Customer.id, Customer.username, Order.id).join(Order).all())
 
-pprint("Below Data is for outerjoin()")
+print("\n Below Data is for outerjoin()")
 q =	session.query(
     Customer.first_name,
     Order.id,
@@ -346,26 +346,26 @@ q =	session.query(
 for c in q:
     print(c.first_name,   c.id)
 
-pprint("Below Data is for group_by() method")
+print("\n Below Data is for group_by() method")
 print(session.query(func.count(Customer.id)).join(Order).filter(
     Customer.first_name == 'John',
     Customer.last_name == 'Green',
 ).group_by(Customer.id).scalar())
 
 
-pprint("Below Data is for having()  method")
+print("\n Below Data is for having()  method")
 print(session.query(
     func.count("*").label('town_count'),
     Customer.town
 ).group_by(Customer.town).having(func.count("*") >= 2).all())
 
-pprint("Below Data is for distinct() method 1 ")
+print("\n Below Data is for distinct() method 1 ")
 print(session.query(Customer.town).filter(Customer.id  < 10).all())
 
-pprint("Below Data is for distinct() method 2 ")
+print("\n Below Data is for distinct() method 2 ")
 print(session.query(Customer.town).filter(Customer.id  < 10).distinct().all())
 
-pprint("Below Data is for distinct() method 3 ")
+print("\n Below Data is for distinct() method 3 ")
 print(
     session.query(
     func.count(distinct(Customer.town)),
@@ -373,7 +373,7 @@ print(
 ).all())
 
 
-print("Below Data is for Unions ")
+print("\n Below Data is for Unions ")
 s1 = session.query(Item.id, Item.name).filter(Item.name.like("Wa%"))
 s2 = session.query(Item.id, Item.name).filter(Item.name.like("%e%"))
 result =  s1.union(s2).all()
@@ -381,7 +381,7 @@ for row in result:
    print (row)
 
 
-print("Below Data is for Updating Data ")
+print("\n Below Data is for Updating Data ")
 i = session.query(Item).filter(
     Item.name.ilike("W%")
 ).update({"quantity": 60}, synchronize_session='fetch')
@@ -394,7 +394,7 @@ print("\n Below Data is for Deleting Data ")
 i = session.query(Item).filter(Item.name == 'Monitor').one()
 session.delete(i)
 session.commit()
-print("\Item: ",i.id,"-",i.name)
+print("Item: ",i.id,"-",i.name)
 
 
 print("\n Below Data is for Raw Queries 1 ")
