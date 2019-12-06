@@ -7,7 +7,7 @@ from datetime import datetime
 from sqlalchemy import *
 from  pprint import pprint
 from sqlalchemy import desc
-from sqlalchemy import func, distinct, cast, Date, union
+from sqlalchemy import func, distinct, cast, Date, union, text
 
 
 
@@ -393,3 +393,19 @@ i = session.query(Item).filter(Item.name == 'Monitor').one()
 session.delete(i)
 session.commit()
 print("Item: ",i.id,"-",i.name)
+
+
+print("Below Data is for Raw Queries 1 ")
+q = session.query(Customer).filter(text("first_name = 'John'")).all()
+for c in q:
+    print("Customer: ", c.id, "-", c.first_name, c.last_name)
+
+print("Below Data is for Raw Queries 2 ")
+q = session.query(Customer).filter(text("town like 'Nor%'")).all()
+for c in q:
+    print("Customer: ", c.id, "-", c.first_name, c.last_name)
+
+print("Below Data is for Raw Queries 3 ")
+q = session.query(Customer).filter(text("town like 'Nor%'")).order_by(text("first_name, id desc")).all()
+for c in q:
+    print("Customer: ", c.id, "-", c.first_name, c.last_name)
