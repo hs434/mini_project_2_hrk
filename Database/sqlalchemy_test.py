@@ -347,5 +347,5 @@ for c in q:
 pprint("Below Data is for group_by() method")
 print(session.query(func.count(Customer.id)).join(Order).filter(
     Customer.first_name == 'John',
-    Customer.last_name == 'Green',
+    Customer.last_name == 'Lara',
 ).group_by(Customer.id).scalar())
