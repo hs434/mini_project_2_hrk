@@ -347,5 +347,12 @@ for c in q:
 pprint("Below Data is for group_by() method")
 print(session.query(func.count(Customer.id)).join(Order).filter(
     Customer.first_name == 'John',
-    Customer.last_name == 'Lara',
+    Customer.last_name == 'Green',
 ).group_by(Customer.id).scalar())
+
+
+pprint("Below Data is for having() method")
+print(session.query(
+    func.count("*").label('town_count'),
+    Customer.town
+).group_by(Customer.town).having(func.count("*") > 2).all())
