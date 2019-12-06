@@ -328,3 +328,6 @@ pprint("Below Data is for join() method")
 q =	session.query(Customer).join(Order).all()
 for c in q:
     print("Customer: ", c.id, "-", c.first_name, c.last_name)
+
+pprint("Below Data is for sql equivalent for join() method")
+print(session.query(Customer).join(Order))
