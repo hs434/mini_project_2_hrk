@@ -331,3 +331,6 @@ for c in q:
 
 pprint("Below Data is for sql equivalent for join() method")
 print(session.query(Customer).join(Order))
+
+pprint("Below Data is for one or more table in a single query")
+pprint(session.query(Customer.id, Customer.username, Order.id).join(Order).all())
