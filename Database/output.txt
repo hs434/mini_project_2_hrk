@@ -1,0 +1,231 @@
+ Below Data for session.query(Customer).all()
+Name:  Toby , Miller  Address:  1662 Kinney Street  Email:  tmiller@example.com
+Name:  Scott , Harvey  Address:  424 Patterson Street  Email:  scottharvey@example.com
+Name:  John , Lara  Address:  3073 Derek Drive  Email:  johnlara@mail.com
+Name:  Sarah , Tomlin  Address:  3572 Poplar Avenue  Email:  sarahtomlin@mail.com
+Name:  Toby , Miller  Address:  1662 Kinney Street  Email:  tmiller@example.com
+Name:  Scott , Harvey  Address:  424 Patterson Street  Email:  scottharvey@example.com
+
+ Below Data for session.query(Item).all()
+Name:  Chair
+Name:  Pen
+Name:  Headphone
+Name:  Travel Bag
+Name:  Keyboard
+Name:  Monitor
+Name:  Watch
+Name:  Water Bottle
+
+ Below Data for session.query(Order).all()
+Order:  1
+Order:  2
+
+ Below Data for session.query(Customer)
+SELECT customers.id AS customers_id, customers.first_name AS customers_first_name, customers.last_name AS customers_last_name, customers.username AS customers_username, customers.email AS customers_email, customers.address AS customers_address, customers.town AS customers_town, customers.created_on AS customers_created_on, customers.updated_on AS customers_updated_on 
+FROM customers
+
+ Below Data with for loop for session.query(Customer)
+1 Toby
+2 Scott
+3 John
+4 Sarah
+5 Toby
+6 Scott
+
+ Below Data for session.query(Customer.id, Customer.first_name).all()
+[(1, 'Toby'), (2, 'Scott'), (3, 'John'), (4, 'Sarah'), (5, 'Toby'), (6, 'Scott')]
+
+ Below Data for count() method
+6
+8
+2
+
+ Below Data for first() method
+Customer: 1 - Toby
+Item: 1 - Chair
+Order: 1
+
+ Below Data for get() method
+Customer: 1 - Toby
+Item: 1 - Chair
+None
+
+  Data for filter() method
+Customer: 3 - John Lara
+
+ Below sql equivalent for filter() method
+SELECT customers.id AS customers_id, customers.first_name AS customers_first_name, customers.last_name AS customers_last_name, customers.username AS customers_username, customers.email AS customers_email, customers.address AS customers_address, customers.town AS customers_town, customers.created_on AS customers_created_on, customers.updated_on AS customers_updated_on 
+FROM customers 
+WHERE customers.first_name = ?
+
+ Below sql equivalent for multiple filters to the filter() method
+SELECT customers.id AS customers_id, customers.first_name AS customers_first_name, customers.last_name AS customers_last_name, customers.username AS customers_username, customers.email AS customers_email, customers.address AS customers_address, customers.town AS customers_town, customers.created_on AS customers_created_on, customers.updated_on AS customers_updated_on 
+FROM customers 
+WHERE customers.id <= ? AND customers.town LIKE ?
+
+ Below Data for all customers who either live in Peterbrugh or Norfolk
+Customer: 3 - John Lara
+
+ Below Data for all customers whose first name is John and live in Norfolk
+Customer: 3 - John Lara
+
+ Below Data for all johns who don't live in Peterbrugh
+Customer: 3 - John Lara
+Customer: 4 - Sarah Tomlin
+
+ Below Data for all customers whose first name is John and live in Norfolk
+Customer: 3 - John Lara
+
+ Below Data for all johns who don't live in Peterbrugh
+Customer: 3 - John Lara
+
+ Below Data is for IS NULL
+
+ Below Data is for IS NOT NULL
+Order:  1
+Order:  2
+
+ Below Data is for IN
+Customer:  1 - Toby Miller
+Customer:  4 - Sarah Tomlin
+Customer:  5 - Toby Miller
+
+ Below Data is for NOT IN
+Customer:  2 - Scott Harvey
+Customer:  3 - John Lara
+Customer:  6 - Scott Harvey
+
+ Below Data is for BETWEEN
+Item:  3 - Headphone
+Item:  4 - Travel Bag
+Item:  5 - Keyboard
+Item:  8 - Water Bottle
+
+ Below Data is for NOT BETWEEN
+Item:  1 - Chair
+Item:  2 - Pen
+Item:  6 - Monitor
+Item:  7 - Watch
+
+ Below Data is for LIKE
+Item:  1 - Chair
+Item:  6 - Monitor
+
+ Below Data is for iLIKE
+Item:  7 - Watch
+Item:  8 - Water Bottle
+
+ Below Data is for NOT LIKE
+Item:  1 - Chair
+Item:  2 - Pen
+Item:  3 - Headphone
+Item:  4 - Travel Bag
+Item:  5 - Keyboard
+Item:  6 - Monitor
+
+ Below Data is for limit() method
+Customer:  1 - Toby Miller
+Customer:  2 - Scott Harvey
+
+ Below Data is for limit() method with ilike
+Customer:  4 - Sarah Tomlin
+
+ Below Data is for sql equivalent for limit() method
+SELECT customers.id AS customers_id, customers.first_name AS customers_first_name, customers.last_name AS customers_last_name, customers.username AS customers_username, customers.email AS customers_email, customers.address AS customers_address, customers.town AS customers_town, customers.created_on AS customers_created_on, customers.updated_on AS customers_updated_on 
+FROM customers
+ LIMIT ? OFFSET ?
+SELECT customers.id AS customers_id, customers.first_name AS customers_first_name, customers.last_name AS customers_last_name, customers.username AS customers_username, customers.email AS customers_email, customers.address AS customers_address, customers.town AS customers_town, customers.created_on AS customers_created_on, customers.updated_on AS customers_updated_on 
+FROM customers 
+WHERE lower(customers.address) LIKE lower(?)
+ LIMIT ? OFFSET ?
+
+ Below Data is for offset() method
+Customer:  3 - John Lara
+Customer:  4 - Sarah Tomlin
+
+ Below Data is for sql equivalent for limit() method
+SELECT customers.id AS customers_id, customers.first_name AS customers_first_name, customers.last_name AS customers_last_name, customers.username AS customers_username, customers.email AS customers_email, customers.address AS customers_address, customers.town AS customers_town, customers.created_on AS customers_created_on, customers.updated_on AS customers_updated_on 
+FROM customers
+ LIMIT ? OFFSET ?
+
+ Below Data is for order_by() method
+Item:  7 - Watch
+Item:  8 - Water Bottle
+
+ Below Data is for order_by() method
+Item:  8 - Water Bottle
+Item:  7 - Watch
+
+ Below Data is for desc() function
+Item:  7 - Watch
+Item:  8 - Water Bottle
+
+ Below Data is for join() method
+Customer:  1 - Toby Miller
+
+ Below Data is for sql equivalent for join() method
+SELECT customers.id AS customers_id, customers.first_name AS customers_first_name, customers.last_name AS customers_last_name, customers.username AS customers_username, customers.email AS customers_email, customers.address AS customers_address, customers.town AS customers_town, customers.created_on AS customers_created_on, customers.updated_on AS customers_updated_on 
+FROM customers JOIN orders ON customers.id = orders.customer_id
+
+ Below Data is for one or more table in a single query
+[(1, 'tmiller', 1), (1, 'tmiller', 2)]
+
+ Below Data is for outerjoin()
+Toby 1
+Toby 2
+Scott None
+John None
+Sarah None
+Toby None
+Scott None
+
+ Below Data is for group_by() method
+None
+
+ Below Data is for having()  method
+[(2, 'Beckinsdale'), (2, 'Norfolk'), (2, 'Wolfden')]
+
+ Below Data is for distinct() method 1 
+[('Wolfden',), ('Beckinsdale',), ('Norfolk',), ('Norfolk',), ('Wolfden',), ('Beckinsdale',)]
+
+ Below Data is for distinct() method 2 
+[('Wolfden',), ('Beckinsdale',), ('Norfolk',)]
+
+ Below Data is for distinct() method 3 
+[(3, 6)]
+
+ Below Data is for Unions 
+(2, 'Pen')
+(3, 'Headphone')
+(4, 'Travel Bag')
+(5, 'Keyboard')
+(7, 'Watch')
+(8, 'Water Bottle')
+
+ Below Data is for Updating Data 
+2
+
+ Below Data is for Deleting Data 
+Item:  6 - Monitor
+
+ Below Data is for Raw Queries 1 
+Customer:  3 - John Lara
+
+ Below Data is for Raw Queries 2 
+Customer:  3 - John Lara
+Customer:  4 - Sarah Tomlin
+
+ Below Data is for Raw Queries 3 
+Customer:  3 - John Lara
+Customer:  4 - Sarah Tomlin
+
+ 
+ Below Data is for Transactions 
+Order Status For Order ID 1
+Transaction completed.
+Order Status For Order ID 2
+Transaction completed.
+Order Status For Order ID 3
+Invalid order id: 3.
+Order Status For Order ID 4
+Invalid order id: 4.
