@@ -7,7 +7,7 @@ from datetime import datetime
 from sqlalchemy import *
 from  pprint import pprint
 from sqlalchemy import desc
-from sqlalchemy import func
+from sqlalchemy import func, distinct
 
 
 
@@ -351,8 +351,21 @@ print(session.query(func.count(Customer.id)).join(Order).filter(
 ).group_by(Customer.id).scalar())
 
 
-pprint("Below Data is for having() method")
+pprint("Below Data is for having()  method")
 print(session.query(
     func.count("*").label('town_count'),
     Customer.town
 ).group_by(Customer.town).having(func.count("*") >= 2).all())
+
+pprint("Below Data is for distinct() method 1 ")
+print(session.query(Customer.town).filter(Customer.id  < 10).all())
+
+pprint("Below Data is for distinct() method 2 ")
+print(session.query(Customer.town).filter(Customer.id  < 10).distinct().all())
+
+pprint("Below Data is for distinct() method 3 ")
+print(
+    session.query(
+    func.count(distinct(Customer.town)),
+    func.count(Customer.town)
+).all())
