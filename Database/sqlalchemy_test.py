@@ -7,7 +7,7 @@ from datetime import datetime
 from sqlalchemy import *
 from  pprint import pprint
 from sqlalchemy import desc
-from sqlalchemy import func, distinct
+from sqlalchemy import func, distinct, cast, Date, union
 
 
 
@@ -369,3 +369,12 @@ print(
     func.count(distinct(Customer.town)),
     func.count(Customer.town)
 ).all())
+
+
+print("Below Data is for Unions ")
+s1 = session.query(Item.id, Item.name).filter(Item.name.like("Wa%"))
+s2 = session.query(Item.id, Item.name).filter(Item.name.like("%e%"))
+result =  s1.union(s2).all()
+for row in result:
+   print (row)
+
